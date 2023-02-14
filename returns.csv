@@ -1,0 +1,11 @@
+﻿sku,quantity,reason
+test001-S,2,Damaged
+test002-L,3,Wrong item
+test001-S,4,Damaged
+test001-S,1,Damaged
+test002-L,4,Wrong item
+test002-L,5,Wrong item
+test003-XL,4,Wrong item
+test005-2XL,2,Too Small
+test005-2XL,3,Too Small
+test006-3XL,1, Too Large
