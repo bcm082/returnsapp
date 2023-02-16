@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import pymongo
-
+from streamlit_autorefresh import st_autorefresh
 
 # Initialize the MongoDb connection
 # Use st.cache to cache the connection so it doesn't have to be reinitialized every time the app is run
@@ -46,6 +46,9 @@ with st.form(key='returns_form', clear_on_submit=True):
             # display a success message
             st.success('Successfully saved')
 
+            # Auto refresh when the form is submitted
+            st_autorefresh()
+
 # Create a dataframe from the MongoDB returns_collection collection
 df = pd.DataFrame(list(collection.find()))
 
@@ -54,5 +57,3 @@ st.table(df.groupby(['SKU', 'Reason']).sum().reset_index().sort_values('Quantity
 
 # plot the data as a bar chart
 st.bar_chart(df.groupby(['SKU', 'Reason'])['Quantity'].sum(numeric_only=True).unstack().head(25))
-
-
