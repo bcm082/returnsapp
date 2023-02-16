@@ -30,14 +30,11 @@ protobuf==3.20.3
 pyarrow==11.0.0
 pydeck==0.8.0
 Pygments==2.14.0
-pykerberos==1.2.4
-pymongo
+pymongo==4.3.3
 Pympler==1.0.1
 pyparsing==3.0.9
 pyrsistent==0.19.3
 python-dateutil==2.8.2
-python-dotenv==0.21.1
-python-snappy==0.6.1
 pytz==2022.7.1
 pytz-deprecation-shim==0.1.0.post0
 requests==2.28.2
@@ -45,7 +42,8 @@ rich==13.3.1
 semver==2.13.0
 six==1.16.0
 smmap==5.0.0
-streamlit==1.18.1
+streamlit==1.17.0
+streamlit-autorefresh==0.0.1
 toml==0.10.2
 toolz==0.12.0
 tornado==6.2
