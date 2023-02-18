@@ -12,8 +12,8 @@ month = st.selectbox(label='Select Month', options=['January'])
 
 # If January is selected, display the data for January
 if month == 'January':
-    df_2022 = pd.read_csv('pages/data/January-2022.csv')
-    df_2023 = pd.read_csv('pages/data/January-2023.csv')
+    df_2022 = pd.read_csv('pages/data/2022/January-2022.csv')
+    df_2023 = pd.read_csv('pages/data/2023/January-2023.csv')
 
 
 st.subheader('Data from ' + month + ' 2022 vs 2023')
