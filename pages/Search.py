@@ -14,20 +14,34 @@ year = st.selectbox(label='Select Year', options=['2021', '2022', '2023'])
 if year == '2021':
     # Concatenate all the csv files in the folder 2021
     df_2021_files = pd.concat(map(pd.read_csv, ['pages/data/2021/January-2021.csv', 'pages/data/2021/February-2021.csv', 'pages/data/2021/March-2021.csv', 'pages/data/2021/April-2021.csv', 'pages/data/2021/May-2021.csv', 'pages/data/2021/June-2021.csv', 'pages/data/2021/July-2021.csv', 'pages/data/2021/August-2021.csv', 'pages/data/2021/September-2021.csv', 'pages/data/2021/October-2021.csv', 'pages/data/2021/November-2021.csv', 'pages/data/2021/December-2021.csv']))
+    
+    # read the csv file for the year 2021 total sold
+    df_2021_total_sold = pd.read_csv('pages/data/2021/2021-Total-Sold.csv')
 
     # Filter the data based on the SKU entered based on partial match
     df_2021 = df_2021_files[df_2021_files['SKU'].str.contains(sku)]
 
+    # Filter the data based on the SKU entered based on partial match on the total sold
+    df_2021_total_sold = df_2021_total_sold[df_2021_total_sold['SKU'].str.contains(sku)]
+
+    # Display in one table the total return quantity and total sold quantity for the sku searched and display the whole number for Total Sold Quantity
+    df_2021_total = df_2021.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).merge(df_2021_total_sold.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False), on='SKU', how='left').fillna(0).astype({'Quantity_x': 'int64', 'Quantity_y': 'int64'}).rename(columns={'Quantity_x': 'Returned Quantity', 'Quantity_y': 'Sold Quantity'})
+    
     # if the SKU is not found, display a message
     if df_2021.empty:
         st.write('SKU not found')
     else:
-        st.subheader('Total Return Quantity')
-        # Display the total return quantity for the SKU searched 
-        st.table(df_2021.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False))
+        # Display df_2021_total in a table
+        st.subheader('Total Return Quantity' + ' - ' + year)
+        st.table(df_2021_total)
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
         st.table(df_2021.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
+
+
+
+################################
+# Start 2022
 
 elif year == '2022':
     # Concatenate all the csv files in the folder 2022
@@ -36,16 +50,29 @@ elif year == '2022':
     # Filter the data based on the SKU entered based on partial match
     df_2022 = df_2022_files[df_2022_files['SKU'].str.contains(sku)]
 
+    # read the csv file for the year 2022 total sold
+    df_2022_total_sold = pd.read_csv('pages/data/2022/2022-Total-Sold.csv')
+
+    df_2022_total_sold = df_2022_total_sold[df_2022_total_sold['SKU'].str.contains(sku)]
+
+    df_2022_total = df_2022.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).merge(df_2022_total_sold.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False), on='SKU', how='left').fillna(0).astype({'Quantity_x': 'int64', 'Quantity_y': 'int64'}).rename(columns={'Quantity_x': 'Returned Quantity', 'Quantity_y': 'Sold Quantity'})
+
     # if the SKU is not found, display a message
     if df_2022.empty:
         st.write('SKU not found')
     else:
-        st.subheader('Total Return Quantity')
-        # Display the total return quantity for the SKU searched 
-        st.table(df_2022.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False))
+        # Display df_2021_total in a table
+        st.subheader('Total Return Quantity'+ ' - ' + year)
+        st.table(df_2022_total)
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
         st.table(df_2022.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
+
+
+
+#####################################
+
+# Start 2023
 
 elif year == '2023':
     # Concatenate all the csv files in the folder 2023
@@ -54,13 +81,19 @@ elif year == '2023':
     # Filter the data based on the SKU entered based on partial match
     df_2023 = df_2023_files[df_2023_files['SKU'].str.contains(sku)]
 
+    df_2023_total_sold = pd.read_csv('pages/data/2023/2023-Total-Sold.csv')
+
+    df_2023_total_sold = df_2023_total_sold[df_2023_total_sold['SKU'].str.contains(sku)]
+
+    df_2023_total = df_2023.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).merge(df_2023_total_sold.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False), on='SKU', how='left').fillna(0).astype({'Quantity_x': 'int64', 'Quantity_y': 'int64'}).rename(columns={'Quantity_x': 'Returned Quantity', 'Quantity_y': 'Sold Quantity'})
+
     # if the SKU is not found, display a message
     if df_2023.empty:
         st.write('SKU not found')
     else:
-        st.subheader('Total Return Quantity')
-        # Display the total return quantity for the SKU searched 
-        st.table(df_2023.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False))
+        # Display df_2021_total in a table
+        st.subheader('Total Return Quantity'+ ' - ' + year)
+        st.table(df_2023_total)
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
         st.table(df_2023.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
