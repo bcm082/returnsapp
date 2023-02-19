@@ -10,7 +10,7 @@ from streamlit_autorefresh import st_autorefresh
 # Initialize the MongoDb connection
 # Use st.cache to cache the connection so it doesn't have to be reinitialized every time the app is run
 #@st.experimental_singleton
-@st.cache_resource
+@st.experimental_memo
 def init_connection():
     return pymongo.MongoClient("mongodb+srv://"+st.secrets['username']+":"+st.secrets['password']+"@"+st.secrets['cluster_id']+".xq4stxw.mongodb.net/?retryWrites=true&w=majority")
 
