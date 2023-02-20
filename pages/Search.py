@@ -32,8 +32,10 @@ if year == '2021':
         st.write('SKU not found')
     else:
         # Display df_2021_total in a table
+        st.markdown("---")
         st.subheader('Total Return Quantity' + ' - ' + year)
         st.table(df_2021_total)
+        st.markdown("---")
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
         st.table(df_2021.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
@@ -61,9 +63,11 @@ elif year == '2022':
     if df_2022.empty:
         st.write('SKU not found')
     else:
+        st.markdown("---")
         # Display df_2021_total in a table
         st.subheader('Total Return Quantity'+ ' - ' + year)
         st.table(df_2022_total)
+        st.markdown("---")
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
         st.table(df_2022.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
@@ -91,9 +95,11 @@ elif year == '2023':
     if df_2023.empty:
         st.write('SKU not found')
     else:
+        st.markdown("---")
         # Display df_2021_total in a table
         st.subheader('Total Return Quantity'+ ' - ' + year)
         st.table(df_2023_total)
+        st.markdown("---")
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
         st.table(df_2023.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))

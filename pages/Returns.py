@@ -3,7 +3,7 @@ import pandas as pd
 
 
 # Create a title for the page
-st.title('Returns Dashboard')
+st.title('Returns By Year and Month')
 
 # Create a dropdown to select the year of the data to display
 year = st.selectbox(label='Select Year', options=['2021', '2022', '2023'])
@@ -74,14 +74,20 @@ st.header('Data from ' + month + ' - ' + year)
 # Display to total number of returns
 st.subheader('Total Returns: ' + str(df['Quantity'].sum()))
 
+st.markdown('---')
+
 st.subheader('Top 25 Returns by SKU')
 # Display the top 25 SKUs by quantity in a table
 st.table(df.groupby('SKU').sum().reset_index().sort_values('Quantity', ascending=False).head(25))
 
-st.write('Top 25 Reason by SKU')
+st.markdown('---')
+
+st.subheader('Top 25 Reason by SKU')
 # Display the data in a table sorted by quantity and combine the sku and reason columns
 st.table(df.groupby(['SKU', 'Reason']).sum().reset_index().sort_values('Quantity', ascending=False).head(25))
 
-st.write('Top 25 Reasons for Returns')
+st.markdown('---')
+
+st.subheader('Top 25 Reasons for Returns')
 # Display the data in a table sort by reason and quantity
 st.table(df.groupby('Reason').sum().reset_index().sort_values('Quantity', ascending=False))

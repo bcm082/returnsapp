@@ -59,6 +59,8 @@ elif month == 'December':
     df_2022 = pd.read_csv('pages/data/2022/December-2022.csv')
     df_2023 = pd.read_csv('pages/data/2023/December-2023.csv')
 
+st.markdown("---")
+
 st.header('Data from ' + month)
 
 # Display the total quantity of returns for the selected month in a table name the first column 'Year' and the second column 'Quantity' and remove the index
@@ -73,7 +75,7 @@ st.pyplot(fig)
 
 st.markdown('---')
 
-st.header('Total Returns for the Whole Year')
+st.header('Total Returns per Year')
 
 # Concatenate the dataframe for all 2021 months and display total returns for 2021
 df_2021 = pd.concat([pd.read_csv('pages/data/2021/January-2021.csv'), pd.read_csv('pages/data/2021/February-2021.csv'), pd.read_csv('pages/data/2021/March-2021.csv'), pd.read_csv('pages/data/2021/April-2021.csv'), pd.read_csv('pages/data/2021/May-2021.csv'), pd.read_csv('pages/data/2021/June-2021.csv'), pd.read_csv('pages/data/2021/July-2021.csv'), pd.read_csv('pages/data/2021/August-2021.csv'), pd.read_csv('pages/data/2021/September-2021.csv'), pd.read_csv('pages/data/2021/October-2021.csv'), pd.read_csv('pages/data/2021/November-2021.csv'), pd.read_csv('pages/data/2021/December-2021.csv')])
