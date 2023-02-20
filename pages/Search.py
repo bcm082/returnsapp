@@ -23,9 +23,15 @@ if year == '2021':
 
     # Filter the data based on the SKU entered based on partial match on the total sold
     df_2021_total_sold = df_2021_total_sold[df_2021_total_sold['SKU'].str.contains(sku)]
+    
 
-    # Display in one table the total return quantity and total sold quantity for the sku searched and display the whole number for Total Sold Quantity
+    # Display in one table the total return quantity and total sold quantity for the sku searched and display the whole number for Total Sold Quantity and a column for the percentage of the total return
     df_2021_total = df_2021.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).merge(df_2021_total_sold.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False), on='SKU', how='left').fillna(0).astype({'Quantity_x': 'int64', 'Quantity_y': 'int64'}).rename(columns={'Quantity_x': 'Returned Quantity', 'Quantity_y': 'Sold Quantity'})
+
+    # add a column for the percentage of the total return and display the percentage with 2 decimals place and percentage sign
+    df_2021_total['Percentage of Total Return'] = df_2021_total['Returned Quantity'] / df_2021_total['Sold Quantity'] * 100
+    df_2021_total['Percentage of Total Return'] = df_2021_total['Percentage of Total Return'].map('{:.2f}%'.format)
+
     
     # if the SKU is not found, display a message
     if df_2021.empty:
@@ -37,10 +43,9 @@ if year == '2021':
         st.table(df_2021_total)
         st.markdown("---")
         st.subheader('Reason of the Return')
-        # Display the total return by Sku and reason
+        # Display the total return by Sku and reason and percentage of the total return
         st.table(df_2021.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
-
-
+        
 
 ################################
 # Start 2022
@@ -58,6 +63,11 @@ elif year == '2022':
     df_2022_total_sold = df_2022_total_sold[df_2022_total_sold['SKU'].str.contains(sku)]
 
     df_2022_total = df_2022.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).merge(df_2022_total_sold.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False), on='SKU', how='left').fillna(0).astype({'Quantity_x': 'int64', 'Quantity_y': 'int64'}).rename(columns={'Quantity_x': 'Returned Quantity', 'Quantity_y': 'Sold Quantity'})
+
+
+    # add a column for the percentage of the total return and display the percentage with 2 decimals place and percentage sign
+    df_2022_total['Percentage of Total Return'] = df_2022_total['Returned Quantity'] / df_2022_total['Sold Quantity'] * 100
+    df_2022_total['Percentage of Total Return'] = df_2022_total['Percentage of Total Return'].map('{:.2f}%'.format)
 
     # if the SKU is not found, display a message
     if df_2022.empty:
@@ -90,6 +100,10 @@ elif year == '2023':
     df_2023_total_sold = df_2023_total_sold[df_2023_total_sold['SKU'].str.contains(sku)]
 
     df_2023_total = df_2023.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).merge(df_2023_total_sold.groupby('SKU')['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False), on='SKU', how='left').fillna(0).astype({'Quantity_x': 'int64', 'Quantity_y': 'int64'}).rename(columns={'Quantity_x': 'Returned Quantity', 'Quantity_y': 'Sold Quantity'})
+
+    # add a column for the percentage of the total return and display the percentage with 2 decimals place and percentage sign
+    df_2023_total['Percentage of Total Return'] = df_2023_total['Returned Quantity'] / df_2023_total['Sold Quantity'] * 100
+    df_2023_total['Percentage of Total Return'] = df_2023_total['Percentage of Total Return'].map('{:.2f}%'.format)
 
     # if the SKU is not found, display a message
     if df_2023.empty:
