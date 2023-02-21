@@ -58,6 +58,19 @@ with st.form(key='returns_form', clear_on_submit=True):
 # Create a dataframe from the MongoDB returns_collection collection
 df = pd.DataFrame(list(collection.find()))
 
+@st.experimental_singleton
+def convert_df(df):
+    return df.to_csv().encode('utf-8')
+
+csv = convert_df(df)
+st.download_button(
+"Export to CSV",
+csv,
+"issue_tracker.csv",
+"text/csv",
+key='issue_tracker'
+)
+
 # Display the data in a table sorted by quantity and combine the sku and reason columns, ignoring the notes column
 st.table(df.groupby(['SKU', 'Reason', 'Notes']).sum().reset_index().sort_values('Quantity', ascending=False).head(25))
 
@@ -66,3 +79,6 @@ st.bar_chart(df.groupby(['SKU', 'Reason'])['Quantity'].sum(numeric_only=True).un
 
 with st.sidebar:
         st.write("")
+
+
+
