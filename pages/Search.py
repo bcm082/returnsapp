@@ -56,7 +56,7 @@ if year == '2021':
         # Display df_2021_total in a table
         st.markdown("---")
         st.subheader('Total Return Quantity' + ' - ' + year)
-        st.table(df_2021_total)
+        st.table(df_2021_total.head(100))
         st.markdown("---")
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason and percentage of the total return
@@ -103,7 +103,7 @@ elif year == '2022':
         st.markdown("---")
         # Display df_2021_total in a table
         st.subheader('Total Return Quantity'+ ' - ' + year)
-        st.table(df_2022_total)
+        st.table(df_2022_total.head(100))
         st.markdown("---")
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
@@ -148,7 +148,7 @@ elif year == '2023':
         st.markdown("---")
         # Display df_2021_total in a table
         st.subheader('Total Return Quantity'+ ' - ' + year)
-        st.table(df_2023_total)
+        st.table(df_2023_total.head(100))
         st.markdown("---")
         st.subheader('Reason of the Return')
         # Display the total return by Sku and reason
