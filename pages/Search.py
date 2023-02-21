@@ -13,7 +13,7 @@ sku = st.text_input(label='Enter SKU')
 year = st.selectbox(label='Select Year', options=['2021', '2022', '2023'])
 
 
-@st.cache_data
+@st.experimental_singleton
 def convert_df(df_2021_total):
     return df_2021_total.to_csv().encode('utf-8')
 
