@@ -28,7 +28,7 @@ with st.form(key='returns_form', clear_on_submit=True):
     quantity = st.number_input(label='Quantity', min_value=1, max_value=100)
 
     # Create a selectbox to collect the reason for the return
-    reason_input = st.selectbox(label='Reason', options=[' ', 'Damaged', 'Defective', 'Wrong Item', 'Missing Parts', 'Too Large', 'Too Small', 'Never Received'])
+    reason_input = st.selectbox(label='Reason', options=[' ', 'Defective', 'Unwanted', 'Wrong Item', 'Missing Parts', 'Too Large', 'Too Small', 'Never Received', 'Missed Delivery Date', 'Bad Description'])
 
     # Create a text area to collect any notes from the user
     note_input = st.text_area(label='Notes')
