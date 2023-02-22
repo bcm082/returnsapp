@@ -40,14 +40,7 @@ if year == '2021':
     df_2021_total['Percentage of Total Return'] = df_2021_total['Returned Quantity'] / df_2021_total['Sold Quantity'] * 100
     df_2021_total['Percentage of Total Return'] = df_2021_total['Percentage of Total Return'].map('{:.2f}%'.format)
     
-    csv = convert_df(df_2021_total)
-    st.download_button(
-    "Export to CSV",
-    csv,
-    "2021-Returns.csv",
-    "text/csv",
-    key='download-2021'
-    )
+    
     
     # if the SKU is not found, display a message
     if df_2021.empty:
@@ -55,12 +48,36 @@ if year == '2021':
     else:
         # Display df_2021_total in a table
         st.markdown("---")
+
         st.subheader('Total Return Quantity' + ' - ' + year)
+
+        csv = convert_df(df_2021_total)
+        st.download_button(
+        "Export to CSV",
+        csv,
+        "2021-Returns-Total.csv",
+        "text/csv",
+        key='download-total-2021'
+        )
+
         st.table(df_2021_total.head(100))
         st.markdown("---")
         st.subheader('Reason of the Return')
+
+        
+        df_2021_reasons = df_2021.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False)
+        
+        csv = convert_df(df_2021_reasons)
+        st.download_button(
+        "Export to CSV",
+        csv,
+        "2021-Returns-Reasons.csv",
+        "text/csv",
+        key='download-reasons-2021'
+        )
+
         # Display the total return by Sku and reason and percentage of the total return
-        st.table(df_2021.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
+        st.table(df_2021_reasons.head(10))
 
         
 
@@ -86,14 +103,7 @@ elif year == '2022':
     df_2022_total['Percentage of Total Return'] = df_2022_total['Returned Quantity'] / df_2022_total['Sold Quantity'] * 100
     df_2022_total['Percentage of Total Return'] = df_2022_total['Percentage of Total Return'].map('{:.2f}%'.format)
 
-    csv = convert_df(df_2022_total)
-    st.download_button(
-    "Export to CSV",
-    csv,
-    "2022-Returns.csv",
-    "text/csv",
-    key='download-2022'
-    )
+    
 
 
     # if the SKU is not found, display a message
@@ -101,13 +111,36 @@ elif year == '2022':
         st.write('SKU not found')
     else:
         st.markdown("---")
+
         # Display df_2021_total in a table
         st.subheader('Total Return Quantity'+ ' - ' + year)
+
+        csv = convert_df(df_2022_total)
+        st.download_button(
+        "Export to CSV",
+        csv,
+        "2022-Returns-Total.csv",
+        "text/csv",
+        key='download-total-2022'
+        )
+
         st.table(df_2022_total.head(100))
         st.markdown("---")
         st.subheader('Reason of the Return')
+
+        df_2022_reasons = df_2022.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False)
+
+        csv = convert_df(df_2022_reasons)
+        st.download_button(
+        "Export to CSV",
+        csv,
+        "2022-Returns-Reasons.csv",
+        "text/csv",
+        key='download-reasons-2022'
+        )
+
         # Display the total return by Sku and reason
-        st.table(df_2022.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
+        st.table(df_2022_reasons.head(10))
 
 
 
@@ -132,15 +165,6 @@ elif year == '2023':
     df_2023_total['Percentage of Total Return'] = df_2023_total['Returned Quantity'] / df_2023_total['Sold Quantity'] * 100
     df_2023_total['Percentage of Total Return'] = df_2023_total['Percentage of Total Return'].map('{:.2f}%'.format)
 
-    csv = convert_df(df_2023_total)
-    st.download_button(
-    "Export to CSV",
-    csv,
-    "2023-Returns.csv",
-    "text/csv",
-    key='download-2023'
-    )
-
     # if the SKU is not found, display a message
     if df_2023.empty:
         st.write('SKU not found')
@@ -148,8 +172,30 @@ elif year == '2023':
         st.markdown("---")
         # Display df_2021_total in a table
         st.subheader('Total Return Quantity'+ ' - ' + year)
+
+        csv = convert_df(df_2023_total)
+        st.download_button(
+        "Export to CSV",
+        csv,
+        "2023-Returns-Total.csv",
+        "text/csv",
+        key='download-total-2023'
+        )
+
         st.table(df_2023_total.head(100))
         st.markdown("---")
         st.subheader('Reason of the Return')
+
+        df_2023_reasons = df_2023.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False)
+
+        csv = convert_df(df_2023_reasons)
+        st.download_button(
+        "Export to CSV",
+        csv,
+        "2023-Returns-Reasons.csv",
+        "text/csv",
+        key='download-reasons-2023'
+        )
+
         # Display the total return by Sku and reason
-        st.table(df_2023.groupby(['SKU', 'Reason'])['Quantity'].sum().reset_index().sort_values('Quantity', ascending=False).head(10))
+        st.table(df_2023_reasons.head(10))
