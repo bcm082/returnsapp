@@ -24,6 +24,8 @@ st.title('TVSO Customer Service Form')
 with st.form(key='returns_form', clear_on_submit=True):
     sku_input = st.text_input(label='SKU')
 
+    sku_input.strip()
+
     # Create a number input to collect the quantity of the return
     quantity = st.number_input(label='Quantity', min_value=1, max_value=100)
 

@@ -65,6 +65,8 @@ elif year == '2022':
 elif year == '2023':
     if month == 'January':
         df = pd.read_csv('pages/data/2023/January-2023.csv')
+    elif month == 'February':
+        df = pd.read_csv('pages/data/2023/February-2023.csv')
     else:
         st.header('No Data Available')
 
