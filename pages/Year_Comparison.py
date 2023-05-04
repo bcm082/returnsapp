@@ -89,6 +89,7 @@ df_2023 = pd.concat([pd.read_csv('pages/data/2023/January-2023.csv'), pd.read_cs
 # Display the total quantity of returns for the selected month in a table name the first column 'Year' and the second column 'Quantity' and remove the index
 st.table(pd.DataFrame({'Year': ['2021', '2022', '2023'], 'Quantity Returned': [df_2021['Quantity'].sum(), df_2022['Quantity'].sum(), df_2023['Quantity'].sum()]}).set_index('Year'))
 
+
 # Create a bar chart to Compare the Total Quantity of Returns for 2021, 2022, and 2023 for the selected month
 fig, ax = plt.subplots()
 ax.bar(x=['2021', '2022', '2023'], height=[df_2021['Quantity'].sum(), df_2022['Quantity'].sum(), df_2023['Quantity'].sum()])
