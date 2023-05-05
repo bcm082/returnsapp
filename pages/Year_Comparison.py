@@ -39,14 +39,27 @@ st.markdown('---')
 
 st.header('Total Returns per Year')
 
+
+def read_and_concat_data(year):
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    dataframes = []
+
+    for month in months:
+        file_path = f'pages/data/{year}/{month}-{year}.csv'
+        df = pd.read_csv(file_path)
+        dataframes.append(df)
+
+    return pd.concat(dataframes)
+
 # Concatenate the dataframe for all 2021 months and display total returns for 2021
-df_2021 = pd.concat([pd.read_csv('pages/data/2021/January-2021.csv'), pd.read_csv('pages/data/2021/February-2021.csv'), pd.read_csv('pages/data/2021/March-2021.csv'), pd.read_csv('pages/data/2021/April-2021.csv'), pd.read_csv('pages/data/2021/May-2021.csv'), pd.read_csv('pages/data/2021/June-2021.csv'), pd.read_csv('pages/data/2021/July-2021.csv'), pd.read_csv('pages/data/2021/August-2021.csv'), pd.read_csv('pages/data/2021/September-2021.csv'), pd.read_csv('pages/data/2021/October-2021.csv'), pd.read_csv('pages/data/2021/November-2021.csv'), pd.read_csv('pages/data/2021/December-2021.csv')])
+df_2021 = read_and_concat_data('2021')
 
 # Concatenate the dataframe for all 2022 months and display total returns for 2022
-df_2022 = pd.concat([pd.read_csv('pages/data/2022/January-2022.csv'), pd.read_csv('pages/data/2022/February-2022.csv'), pd.read_csv('pages/data/2022/March-2022.csv'), pd.read_csv('pages/data/2022/April-2022.csv'), pd.read_csv('pages/data/2022/May-2022.csv'), pd.read_csv('pages/data/2022/June-2022.csv'), pd.read_csv('pages/data/2022/July-2022.csv'), pd.read_csv('pages/data/2022/August-2022.csv'), pd.read_csv('pages/data/2022/September-2022.csv'), pd.read_csv('pages/data/2022/October-2022.csv'), pd.read_csv('pages/data/2022/November-2022.csv'), pd.read_csv('pages/data/2022/December-2022.csv')])
+df_2022 = read_and_concat_data('2022')
 
 # Concatenate the dataframe for all 2023 months and display total returns for 2023
-df_2023 = pd.concat([pd.read_csv('pages/data/2023/January-2023.csv'), pd.read_csv('pages/data/2023/February-2023.csv'), pd.read_csv('pages/data/2023/March-2023.csv'), pd.read_csv('pages/data/2023/April-2023.csv'), pd.read_csv('pages/data/2023/May-2023.csv'), pd.read_csv('pages/data/2023/June-2023.csv'), pd.read_csv('pages/data/2023/July-2023.csv'), pd.read_csv('pages/data/2023/August-2023.csv'), pd.read_csv('pages/data/2023/September-2023.csv'), pd.read_csv('pages/data/2023/October-2023.csv'), pd.read_csv('pages/data/2023/November-2023.csv'), pd.read_csv('pages/data/2023/December-2023.csv')])
+df_2023 = read_and_concat_data('2023')
+
 
 # Display the total quantity of returns for the selected month in a table name the first column 'Year' and the second column 'Quantity' and remove the index
 st.table(pd.DataFrame({'Year': ['2021', '2022', '2023'], 'Quantity Returned': [df_2021['Quantity'].sum(), df_2022['Quantity'].sum(), df_2023['Quantity'].sum()]}).set_index('Year'))
