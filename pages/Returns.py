@@ -12,67 +12,18 @@ year = st.selectbox(label='Select Year', options=['2021', '2022', '2023'])
 month = st.selectbox(label='Select Month', options=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
 
 # Select the data file to display based on the year and month selected
-if year == '2021':
-    if month == 'January':
-        df = pd.read_csv('pages/data/2021/January-2021.csv')
-    elif month == 'February':
-        df = pd.read_csv('pages/data/2021/February-2021.csv')
-    elif month == 'March':
-        df = pd.read_csv('pages/data/2021/March-2021.csv')
-    elif month == 'April':
-        df = pd.read_csv('pages/data/2021/April-2021.csv')
-    elif month == 'May':
-        df = pd.read_csv('pages/data/2021/May-2021.csv')
-    elif month == 'June':
-        df = pd.read_csv('pages/data/2021/June-2021.csv')
-    elif month == 'July':
-        df = pd.read_csv('pages/data/2021/July-2021.csv')
-    elif month == 'August':
-        df = pd.read_csv('pages/data/2021/August-2021.csv')
-    elif month == 'September':
-        df = pd.read_csv('pages/data/2021/September-2021.csv')
-    elif month == 'October':
-        df = pd.read_csv('pages/data/2021/October-2021.csv')
-    elif month == 'November':
-        df = pd.read_csv('pages/data/2021/November-2021.csv')
-    elif month == 'December':
-        df = pd.read_csv('pages/data/2021/December-2021.csv')
-elif year == '2022':
-    if month == 'January':
-        df = pd.read_csv('pages/data/2022/January-2022.csv')
-    elif month == 'February':
-        df = pd.read_csv('pages/data/2022/February-2022.csv')
-    elif month == 'March':
-        df = pd.read_csv('pages/data/2022/March-2022.csv')
-    elif month == 'April':
-        df = pd.read_csv('pages/data/2022/April-2022.csv')
-    elif month == 'May':
-        df = pd.read_csv('pages/data/2022/May-2022.csv')
-    elif month == 'June':
-        df = pd.read_csv('pages/data/2022/June-2022.csv')
-    elif month == 'July':
-        df = pd.read_csv('pages/data/2022/July-2022.csv')
-    elif month == 'August':
-        df = pd.read_csv('pages/data/2022/August-2022.csv')
-    elif month == 'September':
-        df = pd.read_csv('pages/data/2022/September-2022.csv')
-    elif month == 'October':
-        df = pd.read_csv('pages/data/2022/October-2022.csv')
-    elif month == 'November':
-        df = pd.read_csv('pages/data/2022/November-2022.csv')
-    elif month == 'December':
-        df = pd.read_csv('pages/data/2022/December-2022.csv')
-elif year == '2023':
-    if month == 'January':
-        df = pd.read_csv('pages/data/2023/January-2023.csv')
-    elif month == 'February':
-        df = pd.read_csv('pages/data/2023/February-2023.csv')
-    elif month == 'March':
-        df = pd.read_csv('pages/data/2023/March-2023.csv')
-    elif month == 'April':
-        df = pd.read_csv('pages/data/2023/April-2023.csv')
-    else:
+valid_years = ['2021', '2022', '2023']
+valid_months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+if year in valid_years and month in valid_months:
+    file_path = f'pages/data/{year}/{month}-{year}.csv'
+    try:
+        df = pd.read_csv(file_path)
+    except FileNotFoundError:
         st.header('No Data Available')
+else:
+    st.header('Invalid Year or Month')
+
 
 # Display the data in a table
 st.header('Data from ' + month + ' - ' + year)
